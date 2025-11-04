@@ -60,11 +60,6 @@
         #menu-screen {
             text-align: center;
         }
-        
-        #loading-msg {
-            font-style: italic;
-            color: var(--secondary-text);
-        }
 
         .form-group {
             margin-bottom: 20px;
@@ -83,6 +78,22 @@
             font-size: 1em;
             border: 2px solid var(--border-color);
             border-radius: 8px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .checkbox-group label {
+            margin-bottom: 0;
+            font-weight: normal;
+        }
+        .checkbox-group input {
+            transform: scale(1.2);
         }
 
         .btn {
@@ -162,7 +173,7 @@
             padding: 20px 0;
         }
 
-        #german-word {
+        #question-text {
             font-size: 2.2em;
             font-weight: 700;
             color: var(--accent-color);
@@ -256,6 +267,25 @@
             display: block;
         }
 
+        /* --- Footer --- */
+        .footer-credits {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.9em;
+            color: var(--secondary-text);
+        }
+        .footer-credits p {
+            margin: 0;
+        }
+        .footer-credits a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .footer-credits a:hover {
+            text-decoration: underline;
+        }
+
     </style>
 </head>
 <body>
@@ -263,204 +293,155 @@
     <div class="container">
 
         <div id="menu-screen" class="screen">
-            <h1>Flashcards</h1>
-            
-            <div id="loading-msg">Loading word list...</div>
+            <h1>Flashcards: Einbürgerungstest</h1>
 
             <div class="form-group">
-                <label for="lang-select">Answer Language:</label>
+                <label for="lang-select" data-translate-key="answerLang">Answer Language:</label>
                 <select id="lang-select">
                     <option value="pt">Português (pt-br)</option>
                     <option value="en">English (en-us)</option>
                 </select>
             </div>
 
-            <button id="new-game-btn" class="btn">New Game</button>
-            <button id="history-btn" class="btn btn-secondary">History</button>
+            <button id="new-game-btn" class="btn" data-translate-key="newGame">New Game</button>
+            <button id="history-btn" class="btn btn-secondary" data-translate-key="history">History</button>
+            
+            <div class="footer-credits">
+                <p>
+                    <span data-translate-key="credits">Created by</span>: <a href="https://github.com/alexandre-leites/einburgerungstest-flashcards" target="_blank">alexslx<a/> | 
+                    <a href="https://github.com/alexandre-leites/einburgerungstest-flashcards" target="_blank">GitHub</a> | 
+                    <a href="https://buymeacoffee.com/alexandreleites" target="_blank" data-translate-key="donateBuyMeACoffee">Buy Me A Coffee</a> |
+                    <a href="https://buymeacoffee.com/alexandreleites" target="_blank" data-translate-key="donatePayPal">PayPal</a>
+                </p>
+            </div>
         </div>
 
         <div id="game-screen" class="screen hidden">
-            <h2>Einbürgerungstest</h2>
+            <h2 data-translate-key="gameTitle">Einbürgerungstest</h2>
             
             <div class="scoreboard">
-                <div class="stat"><span class="stat-title">Correct</span><span id="correct-count" class="stat-value">0</span></div>
-                <div class="stat"><span class="stat-title">Incorrect</span><span id="incorrect-count" class="stat-value">0</span></div>
-                <div class="stat"><span class="stat-title">Skipped</span><span id="skip-count" class="stat-value">0</span></div>
-                <div class="stat"><span class="stat-title">Total Time</span><span id="total-time" class="stat-value">00:00</span></div>
-                <div class="stat" style="grid-column: 1 / -1;"><span class="stat-title">Avg. Time / Q</span><span id="avg-time" class="stat-value">0.0s</span></div>
+                <div class="stat"><span id="correct-count" class="stat-value">0</span> <span class="stat-title" data-translate-key="statCorrect">Correct</span></div>
+                <div class="stat"><span id="incorrect-count" class="stat-value">0</span> <span class="stat-title" data-translate-key="statIncorrect">Incorrect</span></div>
+                <div class="stat"><span id="skip-count" class="stat-value">0</span> <span class="stat-title" data-translate-key="statSkipped">Skipped</span></div>
+                <div class="stat"><span id="total-time" class="stat-value">00:00</span> <span class="stat-title" data-translate-key="statTotalTime">Total Time</span></div>
+                <div class="stat" style="grid-column: 1 / -1;"><span id="avg-time" class="stat-value">0.0s</span> <span class="stat-title" data-translate-key="statAvgTime">Avg. Time / Q</span></div>
             </div>
 
             <div class="flashcard">
-                <div id="german-word">Loading...</div>
+                <div id="question-text">Loading...</div>
             </div>
 
             <div id="options-container"></div>
 
             <div class="game-controls">
-                <button id="skip-btn" class="btn">Skip</button>
-                <button id="end-game-btn" class="btn btn-secondary">End Game</button>
+                <button id="skip-btn" class="btn" data-translate-key="skipBtn">Skip</button>
+                <button id="end-game-btn" class="btn btn-secondary" data-translate-key="endGameBtn">End Game</button>
             </div>
         </div>
 
         <div id="history-screen" class="screen hidden">
-            <h2>Game History</h2>
+            <h2 data-translate-key="historyTitle">Game History</h2>
             
             <div id="history-list">
-                <p>No games in history.</p>
+                <p data-translate-key="noHistory">No games in history.</p>
             </div>
 
-            <button id="clear-history-btn" class="btn btn-danger">Clear History</button>
-            <button id="back-to-menu-btn" class="btn btn-secondary">Back to Menu</button>
+            <button id="clear-history-btn" class="btn btn-danger" data-translate-key="clearHistoryBtn">Clear History</button>
+            <button id="back-to-menu-btn" class="btn btn-secondary" data-translate-key="backToMenuBtn">Back to Menu</button>
         </div>
 
     </div>
 
     <script>
-        // --- 1. Dados do Jogo (Resolvido o CORS) ---
-        const WORD_LIST = [
-            // category: "politik" (Política e Governo - Source 2)
-            { "de": "der Staat", "pt": "o Estado", "en": "the State", "category": "politik" },
-            { "de": "die Bundesregierung", "pt": "o governo federal", "en": "the federal government", "category": "politik" },
-            { "de": "der Bundestag", "pt": "o Parlamento Federal da Alemanha", "en": "the Federal Parliament of Germany", "category": "politik" },
-            { "de": "der Bundesrat", "pt": "o Conselho Federal (representa os Estados)", "en": "the Federal Council (represents the states)", "category": "politik" },
-            { "de": "die Bundesrepublik", "pt": "a República Federal", "en": "the Federal Republic", "category": "politik" },
-            { "de": "das Bundesland", "pt": "o estado federado (ex: Bayern, Brandenburg)", "en": "the federal state (e.g., Bavaria, Brandenburg)", "category": "politik" },
-            { "de": "der Bundeskanzler / die Bundeskanzlerin", "pt": "o(a) chanceler federal", "en": "the Federal Chancellor", "category": "politik" },
-            { "de": "der Bundespräsident / die Bundespräsidentin", "pt": "o(a) presidente federal", "en": "the Federal President", "category": "politik" },
-            { "de": "die Wahl", "pt": "a eleição", "en": "the election", "category": "politik" },
-            { "de": "die Stimme", "pt": "o voto", "en": "the vote", "category": "politik" },
-            { "de": "wählen", "pt": "votar / escolher", "en": "to vote / to choose", "category": "politik" },
-            { "de": "das Wahlrecht", "pt": "o direito de votar", "en": "the right to vote", "category": "politik" },
-            { "de": "das Grundgesetz", "pt": "a Lei Fundamental (Constituição alemã)", "en": "the Basic Law (German Constitution)", "category": "politik" },
-            { "de": "die Demokratie", "pt": "a democracia", "en": "the democracy", "category": "politik" },
-            { "de": "die Diktatur", "pt": "a ditadura", "en": "the dictatorship", "category": "politik" },
-            { "de": "das Ministerium", "pt": "o ministério", "en": "the ministry", "category": "politik" },
-            { "de": "der Minister / die Ministerin", "pt": "o(a) ministro(a)", "en": "the minister", "category": "politik" },
-            { "de": "der Ministerpräsident / die Ministerpräsidentin", "pt": "chefe de governo de um estado federado", "en": "head of government of a federal state", "category": "politik" },
-            { "de": "die Exekutive", "pt": "o poder executivo", "en": "the executive branch", "category": "politik" },
-            { "de": "die Legislative", "pt": "o poder legislativo", "en": "the legislative branch", "category": "politik" },
-            { "de": "die Judikative", "pt": "o poder judiciário", "en": "the judicial branch", "category": "politik" },
+        // --- 1. Internacionalização (i18n) ---
+        const translations = {
+            en: {
+                answerLang: "Answer Language:",
+                invertOrder: "Invert (Answer -> German)",
+                newGame: "New Game",
+                history: "History",
+                loading: "Loading...",
+                gameTitle: "Einbürgerungstest",
+                statCorrect: "Correct",
+                statIncorrect: "Incorrect",
+                statSkipped: "Skipped",
+                statTotalTime: "Total Time",
+                statAvgTime: "Avg. Time / Q",
+                skipBtn: "Skip",
+                endGameBtn: "End Game",
+                historyTitle: "Game History",
+                noHistory: "No games in history.",
+                clearHistoryBtn: "Clear History",
+                backToMenuBtn: "Back to Menu",
+                confirmClear: "Are you sure you want to clear all history?",
+                historyEntryDate: "Date",
+                historyEntryLang: "Language",
+                historyEntryLangPt: "Portuguese",
+                historyEntryLangEn: "English",
+                historyEntryCorrect: "Correct",
+                historyEntryIncorrect: "Incorrect",
+                historyEntrySkipped: "Skipped",
+                historyEntryTotalTime: "Total Time",
+                historyEntryAvgTime: "Avg. Time",
+                historyEntryAvgTimeSuffix: "/ question",
+                credits: "Created by",
+                donateBuyMeACoffee: "Buy Me A Coffee",
+                donatePaypal: "PayPal",
+                loadError: "Error: Could not load word list. Check file path or network.",
+            },
+            pt: {
+                answerLang: "Idioma da Resposta:",
+                invertOrder: "Inverter (Resposta -> Alemão)",
+                newGame: "Novo Jogo",
+                history: "Histórico",
+                loading: "Carregando...",
+                gameTitle: "Einbürgerungstest",
+                statCorrect: "Corretas",
+                statIncorrect: "Incorretas",
+                statSkipped: "Puladas",
+                statTotalTime: "Tempo Total",
+                statAvgTime: "Tempo Médio / Q",
+                skipBtn: "Pular",
+                endGameBtn: "Terminar Jogo",
+                historyTitle: "Histórico de Jogos",
+                noHistory: "Nenhum jogo no histórico.",
+                clearHistoryBtn: "Limpar Histórico",
+                backToMenuBtn: "Voltar ao Menu",
+                confirmClear: "Tem certeza que deseja limpar todo o histórico?",
+                historyEntryDate: "Data",
+                historyEntryLang: "Idioma",
+                historyEntryLangPt: "Português",
+                historyEntryLangEn: "Inglês",
+                historyEntryCorrect: "Corretas",
+                historyEntryIncorrect: "Incorretas",
+                historyEntrySkipped: "Puladas",
+                historyEntryTotalTime: "Tempo Total",
+                historyEntryAvgTime: "Tempo Médio",
+                historyEntryAvgTimeSuffix: "/ questão",
+                credits: "Criado por",
+                donateBuyMeACoffee: "Buy Me A Coffee",
+                donatePaypal: "PayPal",
+                loadError: "Erro: Não foi possível carregar a lista. Verifique o caminho do arquivo ou a rede.",
+            }
+        };
 
-            // category: "recht" (Direitos, Leis e Justiça - Source 4)
-            { "de": "das Recht", "pt": "o direito", "en": "the right / the law", "category": "recht" },
-            { "de": "das Grundrecht", "pt": "o direito fundamental", "en": "the fundamental right", "category": "recht" },
-            { "de": "die Meinungsfreiheit", "pt": "a liberdade de opinião", "en": "the freedom of opinion", "category": "recht" },
-            { "de": "die Religionsfreiheit", "pt": "a liberdade religiosa", "en": "the freedom of religion", "category": "recht" },
-            { "de": "die Pressefreiheit", "pt": "a liberdade de imprensa", "en": "the freedom of the press", "category": "recht" },
-            { "de": "die Versammlungsfreiheit", "pt": "a liberdade de reunião", "en": "the freedom of assembly", "category": "recht" },
-            { "de": "die Gleichbehandlung", "pt": "a igualdade de tratamento", "en": "the equal treatment", "category": "recht" },
-            { "de": "verboten", "pt": "proibido", "en": "forbidden / prohibited", "category": "recht" },
-            { "de": "erlaubt", "pt": "permitido", "en": "allowed / permitted", "category": "recht" },
-            { "de": "die Gewalt (im Staat)", "pt": "o poder (no Estado)", "en": "the power (in the State)", "category": "recht" },
-            { "de": "die Strafbarkeit", "pt": "a punibilidade", "en": "the culpability", "category": "recht" },
-            { "de": "die Straftat", "pt": "o ato criminoso", "en": "the criminal act", "category": "recht" },
-            { "de": "das Gericht", "pt": "o tribunal", "en": "the court", "category": "recht" },
-            { "de": "der Richter / die Richterin", "pt": "o(a) juiz(a)", "en": "the judge", "category": "recht" },
-            { "de": "der Rechtsanwalt / die Rechtsanwältin", "pt": "o(a) advogado(a)", "en": "the lawyer", "category": "recht" },
-            { "de": "das Urteil", "pt": "a sentença / o veredito", "en": "the verdict / judgment", "category": "recht" },
-            { "de": "der Prozess", "pt": "o processo (judicial)", "en": "the trial (judicial process)", "category": "recht" },
-            { "de": "die Klage", "pt": "a ação judicial / queixa", "en": "the lawsuit / complaint", "category": "recht" },
-            { "de": "Einspruch einlegen", "pt": "apresentar recurso / objeção", "en": "to file an objection", "category": "recht" },
-            { "de": "der Arbeitsvertrag", "pt": "o contrato de trabalho", "en": "the employment contract", "category": "recht" },
-            { "de": "die Kündigung", "pt": "a demissão (ou rescisão do contrato)", "en": "the termination (of contract)", "category": "recht" },
-            { "de": "das Arbeitsgericht", "pt": "o tribunal trabalhista", "en": "the labor court", "category": "recht" },
-
-            // category: "geschichte" (História e Sociedade - Source 6)
-            { "de": "der Zweite Weltkrieg (1939–1945)", "pt": "a Segunda Guerra Mundial", "en": "the Second World War", "category": "geschichte" },
-            { "de": "die Wiedervereinigung (1990)", "pt": "a reunificação (da Alemanha)", "en": "the reunification (of Germany)", "category": "geschichte" },
-            { "de": "die DDR (Deutsche Demokratische Republik)", "pt": "a Alemanha Oriental (RDA em português)", "en": "East Germany (GDR)", "category": "geschichte" },
-            { "de": "die BRD (Bundesrepublik Deutschland)", "pt": "a Alemanha Ocidental", "en": "West Germany (FRG)", "category": "geschichte" },
-            { "de": "die Besatzungsmacht", "pt": "a potência ocupante", "en": "the occupying power", "category": "geschichte" },
-            { "de": "die Wende (1989)", "pt": "a virada (queda do Muro de Berlim etc.)", "en": "the turning point (fall of the Wall, etc.)", "category": "geschichte" },
-            { "de": "der Holocaust", "pt": "o Holocausto", "en": "the Holocaust", "category": "geschichte" },
-            { "de": "die Nationalsozialisten / die Nazis", "pt": "os nacional-socialistas (nazistas)", "en": "the National Socialists (Nazis)", "category": "geschichte" },
-            { "de": "die NS-Zeit (1933–1945)", "pt": "o período nazista", "en": "the Nazi period", "category": "geschichte" },
-            { "de": "die Siegermächte / Alliierten", "pt": "as potências aliadas", "en": "the Allied powers", "category": "geschichte" },
-            { "de": "der Warschauer Pakt", "pt": "o Pacto de Varsóvia", "en": "the Warsaw Pact", "category": "geschichte" },
-            { "de": "die NATO", "pt": "a OTAN (aliança militar ocidental)", "en": "NATO (Western military alliance)", "category": "geschichte" },
-            { "de": "die Bundeswehr", "pt": "as Forças Armadas Alemãs", "en": "the German Armed Forces", "category": "geschichte" },
-
-            // category: "kultur" (Sociedade, Cultura e Datas Festivas - Source 8)
-            { "de": "das Fest", "pt": "a festa", "en": "the party / festival", "category": "kultur" },
-            { "de": "Weihnachten", "pt": "Natal", "en": "Christmas", "category": "kultur" },
-            { "de": "Ostern", "pt": "Páscoa", "en": "Easter", "category": "kultur" },
-            { "de": "Pfingsten", "pt": "Pentecostes", "en": "Pentecost (Whitsun)", "category": "kultur" },
-            { "de": "der Rosenmontag", "pt": "a segunda-feira de carnaval", "en": "Carnival Monday", "category": "kultur" },
-            { "de": "der Feiertag", "pt": "o feriado", "en": "the holiday", "category": "kultur" },
-            { "de": "der Brauch", "pt": "o costume / a tradição", "en": "the custom / tradition", "category": "kultur" },
-            { "de": "die Maske", "pt": "a máscara", "en": "the mask", "category": "kultur" },
-            { "de": "das Kostüm", "pt": "a fantasia / o traje de carnaval", "en": "the costume", "category": "kultur" },
-            { "de": "der Tannenbaum", "pt": "a árvore de Natal", "en": "the Christmas tree", "category": "kultur" },
-            { "de": "die Eier bemalen", "pt": "pintar ovos (tradição de Páscoa)", "en": "to paint eggs (Easter tradition)", "category": "kultur" },
-            { "de": "die Einheit", "pt": "a unidade (Tag der Deutschen Einheit – 3/10)", "en": "the unity (Day of German Unity - 3/10)", "category": "kultur" },
-            { "de": "der Gedenktag", "pt": "o dia de memória / de comemoração", "en": "the day of remembrance", "category": "kultur" },
-
-            // category: "soziales" (Estrutura Familiar, Educação e Benefícios Sociais - Source 10)
-            { "de": "die Familie", "pt": "a família", "en": "the family", "category": "soziales" },
-            { "de": "das Jugendamt", "pt": "o serviço de proteção à criança e ao adolescente", "en": "the Youth Welfare Office", "category": "soziales" },
-            { "de": "der Kindergarten", "pt": "o jardim de infância", "en": "the kindergarten", "category": "soziales" },
-            { "de": "die Schule", "pt": "a escola", "en": "the school", "category": "soziales" },
-            { "de": "die Schulpflicht", "pt": "a obrigação / compulsoriedade escolar", "en": "the compulsory schooling", "category": "soziales" },
-            { "de": "die Ausbildung", "pt": "a formação profissional (geral)", "en": "the vocational training", "category": "soziales" },
-            { "de": "das Studium", "pt": "o estudo universitário", "en": "the university study", "category": "soziales" },
-            { "de": "das Abitur", "pt": "o exame final do Ensino Médio (habilita à faculdade)", "en": "the high school graduation exam (qualifies for university)", "category": "soziales" },
-            { "de": "die Krankenversicherung", "pt": "o seguro de saúde", "en": "the health insurance", "category": "soziales" },
-            { "de": "die Pflegeversicherung", "pt": "o seguro de cuidados (p/ idosos, dependentes etc.)", "en": "the long-term care insurance", "category": "soziales" },
-            { "de": "die Rentenversicherung", "pt": "o seguro de aposentadoria", "en": "the pension insurance", "category": "soziales" },
-            { "de": "das Elterngeld", "pt": "o benefício parental", "en": "the parental allowance", "category": "soziales" },
-            { "de": "der Mutterschutz", "pt": "a proteção à maternidade", "en": "the maternity protection", "category": "soziales" },
-
-            // category: "wirtschaft" (Economia, Finanças e Trabalho - Source 12)
-            { "de": "die soziale Marktwirtschaft", "pt": "a economia social de mercado", "en": "the social market economy", "category": "wirtschaft" },
-            { "de": "der Lohn / das Gehalt", "pt": "o salário / ordenado", "en": "the wage / salary", "category": "wirtschaft" },
-            { "de": "die Steuer", "pt": "o imposto", "en": "the tax", "category": "wirtschaft" },
-            { "de": "die Kirchensteuer", "pt": "o imposto religioso (igreja)", "en": "the church tax", "category": "wirtschaft" },
-            { "de": "die Sozialversicherung", "pt": "o seguro social", "en": "the social security", "category": "wirtschaft" },
-            { "de": "die Arbeitslosenversicherung", "pt": "o seguro-desemprego", "en": "the unemployment insurance", "category": "wirtschaft" },
-            { "de": "die Agentur für Arbeit", "pt": "a agência de emprego", "en": "the employment agency", "category": "wirtschaft" },
-            { "de": "das Arbeitsamt (antigo nome)", "pt": "agência de emprego (antes: ‘Arbeitsamt’)", "en": "employment office (old name)", "category": "wirtschaft" },
-            { "de": "die Schwarzarbeit", "pt": "o trabalho ilegal / não declarado", "en": "the undeclared work", "category": "wirtschaft" },
-
-            // category: "diverses" (Diversos Termos Recorrentes - Source 14)
-            { "de": "die Behörde", "pt": "a repartição pública / o órgão público", "en": "the authority / public office", "category": "diverses" },
-            { "de": "das Einwohnermeldeamt", "pt": "o setor de registro de residentes (cartório de endereço)", "en": "the residents' registration office", "category": "diverses" },
-            { "de": "das Standesamt", "pt": "o cartório de registro civil", "en": "the registry office", "category": "diverses" },
-            { "de": "das Gewerbeamt", "pt": "o departamento/licença de atividades comerciais", "en": "the trade office", "category": "diverses" },
-            { "de": "die Bürgerinitiative", "pt": "a iniciativa popular", "en": "the citizens' initiative", "category": "diverses" },
-            { "de": "die Meinungsäußerung", "pt": "a manifestação de opinião", "en": "the expression of opinion", "category": "diverses" },
-            { "de": "die Demonstration anmelden", "pt": "registrar a manifestação", "en": "to register the demonstration", "category": "diverses" },
-            { "de": "die Polizeiwache / das Polizeirevier", "pt": "a delegacia de polícia", "en": "the police station", "category": "diverses" },
-            { "de": "der Reisepass", "pt": "o passaporte", "en": "the passport", "category": "diverses" },
-            { "de": "der Personalausweis", "pt": "a carteira de identidade", "en": "the ID card", "category": "diverses" },
-            { "de": "die Staatsangehörigkeit", "pt": "a nacionalidade", "en": "the nationality", "category": "diverses" },
-            { "de": "die Einbürgerung", "pt": "a naturalização", "en": "the naturalization", "category": "diverses" },
-            { "de": "die Unterlagen (pl.)", "pt": "a documentação", "en": "the documents", "category": "diverses" },
-            { "de": "das Formular", "pt": "o formulário", "en": "the form", "category": "diverses" },
-            { "de": "die Anmeldung", "pt": "o registro, a inscrição", "en": "the registration", "category": "diverses" },
-            { "de": "das Wohnrecht", "pt": "o direito de moradia", "en": "the right of residence", "category": "diverses" },
-            { "de": "die Hausordnung", "pt": "o regulamento do prédio (condomínio)", "en": "the house rules", "category": "diverses" },
-
-            // category: "geographie" (Estados e Capitais - Source 15)
-            { "de": "Baden-Württemberg", "pt": "Stuttgart", "en": "Stuttgart", "category": "geographie" },
-            { "de": "Bayern (Baviera)", "pt": "München (Munique)", "en": "Munich", "category": "geographie" },
-            { "de": "Berlin", "pt": "Berlin", "en": "Berlin", "category": "geographie" },
-            { "de": "Brandenburg", "pt": "Potsdam", "en": "Potsdam", "category": "geographie" },
-            { "de": "Bremen", "pt": "Bremen", "en": "Bremen", "category": "geographie" },
-            { "de": "Hamburg", "pt": "Hamburg", "en": "Hamburg", "category": "geographie" },
-            { "de": "Hessen", "pt": "Wiesbaden", "en": "Wiesbaden", "category": "geographie" },
-            { "de": "Mecklenburg-Vorpommern", "pt": "Schwerin", "en": "Schwerin", "category": "geographie" },
-            { "de": "Niedersachsen (Baixa Saxônia)", "pt": "Hannover", "en": "Hanover", "category": "geographie" },
-            { "de": "Nordrhein-Westfalen", "pt": "Düsseldorf", "en": "Düsseldorf", "category": "geographie" },
-            { "de": "Rheinland-Pfalz", "pt": "Mainz", "en": "Mainz", "category": "geographie" },
-            { "de": "Saarland", "pt": "Saarbrücken", "en": "Saarbrücken", "category": "geographie" },
-            { "de": "Sachsen (Saxônia)", "pt": "Dresden", "en": "Dresden", "category": "geographie" },
-            { "de": "Sachsen-Anhalt", "pt": "Magdeburg", "en": "Magdeburg", "category": "geographie" },
-            { "de": "Schleswig-Holstein", "pt": "Kiel", "en": "Kiel", "category": "geographie" },
-            { "de": "Thüringen", "pt": "Erfurt", "en": "Erfurt", "category": "geographie" }
-        ];
-
+        function applyTranslations(lang) {
+            const strings = translations[lang] || translations.en;
+            document.querySelectorAll('[data-translate-key]').forEach(el => {
+                const key = el.dataset.translateKey;
+                if (strings[key]) {
+                    el.textContent = strings[key];
+                }
+            });
+            // Atualiza elementos que não são estáticos
+            const historyListP = ui.historyList.querySelector('p[data-translate-key="noHistory"]');
+            if (historyListP) {
+                historyListP.textContent = strings.noHistory;
+            }
+        }
+        
         // --- 2. Variáveis Globais ---
-        let wordList = []; // Será preenchida por WORD_LIST
+        let wordList = []; // Será preenchida por fetch
         let gameHistory = [];
         let currentGame = {};
         let currentCorrectAnswer = null;
@@ -468,6 +449,7 @@
         let questionStartTime = null;
 
         const HISTORY_KEY = "flashcardHistory";
+        const SETTINGS_KEY = "flashcardSettings";
         const TOTAL_OPTIONS = 5;
         const SIMILAR_OPTIONS_COUNT = 2;
 
@@ -486,9 +468,8 @@
             endGame: document.getElementById('end-game-btn')
         };
         const ui = {
-            loadingMsg: document.getElementById('loading-msg'),
             langSelect: document.getElementById('lang-select'),
-            germanWord: document.getElementById('german-word'),
+            questionText: document.getElementById('question-text'),
             optionsContainer: document.getElementById('options-container'),
             historyList: document.getElementById('history-list'),
             // Placar
@@ -518,7 +499,6 @@
             return (ms / 1000).toFixed(1) + 's';
         }
         
-        // Função para embaralhar um array (Fisher-Yates shuffle)
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -527,7 +507,32 @@
             return array;
         }
 
-        // --- 6. Lógica de Histórico (LocalStorage) ---
+        // --- 6. Lógica de Configurações e Histórico (LocalStorage) ---
+        function loadSettings() {
+            const settings = JSON.parse(localStorage.getItem(SETTINGS_KEY)) || {};
+            const lang = settings.uiLang || 'en'; // Default 'en'
+
+            ui.langSelect.value = lang;
+            
+            return lang;
+        }
+
+        function saveSettings() {
+            const settings = {
+                uiLang: ui.langSelect.value
+            };
+            localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+        }
+
+        function handleSettingsChange() {
+            saveSettings();
+            applyTranslations(ui.langSelect.value);
+            // Re-renderiza o histórico se estiver visível, para traduzir as datas/legendas
+            if (!screens.history.classList.contains('hidden')) {
+                renderHistory();
+            }
+        }
+
         function loadHistory() {
             gameHistory = JSON.parse(localStorage.getItem(HISTORY_KEY)) || [];
         }
@@ -538,27 +543,30 @@
         
         function renderHistory() {
             ui.historyList.innerHTML = '';
+            const uiLang = ui.langSelect.value || 'en';
+            const strings = translations[uiLang] || translations.en;
+            
             if (gameHistory.length === 0) {
-                ui.historyList.innerHTML = '<p style="text-align: center;">No games in history.</p>';
+                ui.historyList.innerHTML = `<p style="text-align: center;" data-translate-key="noHistory">${strings.noHistory}</p>`;
                 return;
             }
             
             gameHistory.slice().reverse().forEach(game => {
-                const date = new Date(game.date).toLocaleString('en-US');
-                const lang = game.lang === 'pt' ? 'Portuguese' : 'English';
+                const date = new Date(game.date).toLocaleString(uiLang.startsWith('pt') ? 'pt-BR' : 'en-US');
+                const lang = game.lang === 'pt' ? strings.historyEntryLangPt : strings.historyEntryLangEn;
                 const totalTime = formatTime(game.totalTime);
                 const avgTime = formatAvgTime(game.avgTime);
                 
                 const entry = document.createElement('div');
                 entry.className = 'history-entry';
                 entry.innerHTML = `
-                    <div class="history-entry-date">${date} (Language: ${lang})</div>
+                    <div class="history-entry-date">${date} (${strings.historyEntryLang}: ${lang})</div>
                     <div class="history-entry-stats">
-                        <span>✅ Correct: ${game.correct}</span>
-                        <span>❌ Incorrect: ${game.incorrect}</span>
-                        <span>↷ Skipped: ${game.skipped}</span>
-                        <span>⏱️ Total Time: ${totalTime}</span>
-                        <span style="grid-column: 1 / -1;">📊 Avg. Time: ${avgTime} / question</span>
+                        <span>✅ ${strings.historyEntryCorrect}: ${game.correct}</span>
+                        <span>❌ ${strings.historyEntryIncorrect}: ${game.incorrect}</span>
+                        <span>↷ ${strings.historyEntrySkipped}: ${game.skipped}</span>
+                        <span>⏱️ ${strings.historyEntryTotalTime}: ${totalTime}</span>
+                        <span style="grid-column: 1 / -1;">📊 ${strings.historyEntryAvgTime}: ${avgTime} ${strings.historyEntryAvgTimeSuffix}</span>
                     </div>
                 `;
                 ui.historyList.appendChild(entry);
@@ -571,7 +579,9 @@
         }
         
         function clearHistory() {
-            if (confirm('Are you sure you want to clear all history?')) {
+            const uiLang = ui.langSelect.value || 'en';
+            const strings = translations[uiLang] || translations.en;
+            if (confirm(strings.confirmClear)) {
                 gameHistory = [];
                 saveHistory();
                 renderHistory();
@@ -579,15 +589,33 @@
         }
 
         // --- 7. Lógica do Jogo ---
-        function initializeData() {
-            wordList = WORD_LIST;
-            if (wordList.length > 0) {
-                ui.loadingMsg.textContent = 'Word list loaded!';
-                ui.loadingMsg.style.color = 'var(--correct-color)';
+        
+        async function startLoadingGame() {
+            const lang = ui.langSelect.value;
+            const strings = translations[lang] || translations.en;
+            
+            buttons.newGame.disabled = true;
+            buttons.newGame.textContent = strings.loading;
+
+            try {
+                const response = await fetch(`data/words_${lang}.json`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                wordList = await response.json();
+                
+                if (wordList.length === 0) {
+                     throw new Error("Word list loaded but is empty.");
+                }
+
+                startGame(lang);
+
+            } catch (error) {
+                console.error('Failed to load word list:', error);
+                alert(strings.loadError);
+            } finally {
                 buttons.newGame.disabled = false;
-            } else {
-                ui.loadingMsg.textContent = 'Error: Word list is empty.';
-                ui.loadingMsg.style.color = 'var(--incorrect-color)';
+                applyTranslations(lang); // Restaura o texto original do botão
             }
         }
         
@@ -606,11 +634,9 @@
             ui.avgTime.textContent = formatAvgTime(avg);
         }
 
-        function startGame() {
-            const selectedLang = ui.langSelect.value;
-            
+        function startGame(lang) {
             currentGame = {
-                lang: selectedLang,
+                lang: lang,
                 correct: 0,
                 incorrect: 0,
                 skipped: 0,
@@ -644,42 +670,49 @@
             saveHistory();
             
             currentGame = {};
+            wordList = []; // Limpa a wordlist da memória
             showScreen('menu');
         }
 
         function loadNewQuestion() {
             ui.optionsContainer.innerHTML = '';
             
+            const lang = currentGame.lang;
+            const invert = Math.random() < 0.15; // 15% chance to invert this card
+            
+            // Define qual chave é a pergunta e qual é a resposta
+            const questionKey = invert ? lang : 'de';
+            const answerKey = invert ? 'de' : lang;
+
             // 1. Escolhe a palavra correta
             const correctEntry = wordList[Math.floor(Math.random() * wordList.length)];
-            const lang = currentGame.lang;
-            currentCorrectAnswer = correctEntry[lang];
+            currentCorrectAnswer = correctEntry[answerKey];
             
             let optionsSet = new Set();
             optionsSet.add(currentCorrectAnswer);
 
             // 2. Encontra opções "similares" (mesma categoria)
             let similarCandidates = wordList.filter(entry => 
-                entry.category === correctEntry.category && entry[lang] !== currentCorrectAnswer
+                entry.category === correctEntry.category && entry[answerKey] !== currentCorrectAnswer
             );
             shuffle(similarCandidates);
             
             for (let i = 0; i < SIMILAR_OPTIONS_COUNT && i < similarCandidates.length; i++) {
-                optionsSet.add(similarCandidates[i][lang]);
+                optionsSet.add(similarCandidates[i][answerKey]);
             }
             
             // 3. Encontra opções "aleatórias" (para completar 5)
-            let randomCandidates = wordList.filter(entry => entry[lang] !== currentCorrectAnswer);
+            let randomCandidates = wordList.filter(entry => entry[answerKey] !== currentCorrectAnswer);
             shuffle(randomCandidates);
 
             let candidateIndex = 0;
             while (optionsSet.size < TOTAL_OPTIONS && candidateIndex < randomCandidates.length) {
-                optionsSet.add(randomCandidates[candidateIndex][lang]);
+                optionsSet.add(randomCandidates[candidateIndex][answerKey]);
                 candidateIndex++;
             }
             
             // 4. Renderiza
-            ui.germanWord.textContent = correctEntry.de;
+            ui.questionText.textContent = correctEntry[questionKey];
             
             let finalOptions = shuffle(Array.from(optionsSet));
             finalOptions.forEach(optionText => {
@@ -703,7 +736,7 @@
             recordQuestionTime();
             
             document.querySelectorAll('.option-btn').forEach(btn => btn.disabled = true);
-			let delayTime = 350;
+            let delayTime = 350;
             
             if (selectedText === currentCorrectAnswer) {
                 currentGame.correct++;
@@ -713,7 +746,7 @@
                 currentGame.incorrect++;
                 ui.incorrectCount.textContent = currentGame.incorrect;
                 buttonEl.classList.add('incorrect');
-				delayTime = 1500;
+                delayTime = 1500;
                 
                 document.querySelectorAll('.option-btn').forEach(btn => {
                     if (btn.textContent === currentCorrectAnswer) {
@@ -736,15 +769,18 @@
 
         // --- 8. Inicialização ---
         document.addEventListener('DOMContentLoaded', () => {
-            buttons.newGame.onclick = startGame;
+            buttons.newGame.onclick = startLoadingGame;
             buttons.history.onclick = showHistoryScreen;
             buttons.backToMenu.onclick = () => showScreen('menu');
             buttons.clearHistory.onclick = clearHistory;
             buttons.skip.onclick = skipQuestion;
             buttons.endGame.onclick = endGame;
             
+            ui.langSelect.onchange = handleSettingsChange;
+            
             loadHistory();
-            initializeData(); // Carrega os dados internos em vez de fetch
+            const initialLang = loadSettings(); // Carrega e aplica settings salvos
+            applyTranslations(initialLang); // Aplica traduções na carga inicial
             
             showScreen('menu');
         });
