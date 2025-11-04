@@ -13,7 +13,6 @@ This app focuses on the specific political, historical, and social terminology r
 
 ## 📸 Screenshot
 
-*(Recomendo que você tire um screenshot do app e o coloque aqui)*
 `![Screenshot of the Einbürgerungstest Flashcard App](./assets/screenshot.png)`
 
 ---
@@ -35,7 +34,6 @@ This app focuses on the specific political, historical, and social terminology r
 
 The easiest way to use the app is directly on GitHub Pages:
 **[https://alexandre-leites.github.io/einburgerungstest-flashcards/](https://alexandre-leites.github.io/einburgerungstest-flashcards/)**
-*(Lembre-se de habilitar o GitHub Pages no seu repositório, na aba "Settings", para que este link funcione. Aponte-o para a pasta `/docs`)*
 
 ### 2. Local Development
 
@@ -50,7 +48,7 @@ The repository includes helper scripts to make this easy.
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/alexandre-leites/einburgerungstest-flashcards.git](https://github.com/alexandre-leites/einburgerungstest-flashcards.git)
+    git clone https://github.com/alexandre-leites/einburgerungstest-flashcards.git
     cd einburgerungstest-flashcards
     ```
 
