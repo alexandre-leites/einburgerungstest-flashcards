@@ -1,7 +1,7 @@
 # Flashcards: Einbürgerungstest Vocabulary
 
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/alexandreleites)
-[![PayPal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)]([YOUR_PAYPAL_LINK])
+[![PayPal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://www.paypal.com/donate/?business=3MSNX9JF287VW&no_recurring=0&item_name=Hi+there%21+I%E2%80%99m+Alexandre+Leites%2C+a+software+engineer+and+the+author+of+several+technology+projects.&currency_code=USD)
 
 A simple, clean, no-fuss flashcard web app designed to help you study the key vocabulary for the German *Einbürgerungstest* (Naturalization Test).
 
@@ -65,7 +65,7 @@ This project was created by **alexslx** ([@alexandre-leites](https://github.com/
 If this tool helped you with your studies, please consider supporting its development or just saying thanks!
 
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/alexandreleites)
-[![PayPal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)]([YOUR_PAYPAL_LINK])
+[![PayPal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://www.paypal.com/donate/?business=3MSNX9JF287VW&no_recurring=0&item_name=Hi+there%21+I%E2%80%99m+Alexandre+Leites%2C+a+software+engineer+and+the+author+of+several+technology+projects.&currency_code=USD)
 
 ---
 
